@@ -1,0 +1,71 @@
+<tr>
+	<td>
+		<div class="group-cr form-group" ng-class="{ 'has-error': storeForm.thickness.$dirty && storeForm.thickness.$invalid}">
+			<div class="controls">
+				<input name="thickness" type="number" id="thickness" class="form-control" placeholder="толщина">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group" ng-class="{ 'has-error': storeForm.widthList.$dirty && storeForm.widthList.$invalid }">
+			<div class="controls">
+				<input name="widthList" type="number" id="widthList" class="form-control" placeholder="ширина">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group" ng-class="{ 'has-error': storeForm.lengthList.$dirty && storeForm.lengthList.$invalid }">
+			<div class="controls">
+				<input name="lengthList" type="number" id="lengthList" class="form-control" placeholder="длинна">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="amount" type="number" id="amount" class="form-control" placeholder="К-во листов">
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group">
+			<div class="controls">
+				<input name="priseAllList" type="number" id="priseAllList" class="form-control" placeholder="Цена листов">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group">
+			<div class="controls">
+				<input name="weightAllList" type="number" id="weightAllList" class="form-control" placeholder="Вес листов">
+			</div>
+		</div>
+	</td>
+	<td> 
+		<div class="form-group  checkbox-table">
+			<div class="controls">
+				<label class="checkbox checkbox-table-label">Неправильна<br> форма
+					<input name="formList" type="checkbox" id="formList" class="checkbox  checkbox-table-midle">
+				</label>				
+			</div>
+		</div>
+	</td>
+	<td>
+		<select data-ng-model="NameAcceptanceInspector" name="NameAcceptanceInspector" class="group-sel form-control" id="NameAcceptanceInspector">
+			<option></option>		
+		    <option disabled>Выберите имя резчика</option>
+		    <option value="Дияк">Дияк</option>
+		    <option value="Теодор">Теодор</option>
+		    <option value="Гараздовский">Гараздовский</option>
+		    <option value="Паша">Паша</option>
+		    <option value="Игорь">Игорь</option>
+		</select>
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="sheetContent" type="text" maxlength="160" id="sheetContent" class="form-control" placeholder="Заметки">
+			</div>
+		</div>
+	</td>	
+</tr>

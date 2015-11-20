@@ -1,0 +1,278 @@
+<section data-ng-controller="ArticlesController" data-ng-init="findOne()" class="row">
+	
+	<h3 class="col-md-12"><span class="label label-default">Редактирование заказа</span></h3>
+
+	
+	<form name="articleForm" class="form-horizontal col-md-12" data-ng-submit="update(articleForm.$valid)" novalidate>
+		<fieldset class="row">
+			<div class="form-group form-group-sm col-md-6">
+				<label for="name-customer-create">Выберите имя клиента:</label>
+				<input type="text"  name="NameCustomerCreate" data-ng-model='article.NameCustomerCreate' ng-change="find()" class="form-control" id="name-customer-create" list="for_NameCustomerCreate">
+				<datalist id="for_NameCustomerCreate">		
+					 <option data-ng-repeat="customer in customers | orderBy: 'nameCustomer'" value="{{customer.nameCustomer}}">{{customer.nameCustomer}}</option>		
+				</datalist>			
+			</div>				
+
+			<div class="form-group form-group-sm col-md-6">
+				<label for='NameAcceptanceOrder'>Выберите имя принявшего заказ</label>
+				<select data-ng-model="article.NameAcceptanceOrder" name="NameAcceptanceOrder" class="form-control" id="NameAcceptanceOrder">		
+				    <option disabled>Выберите имя принявшего заказ</option>
+				    <option value="троць">Троць</option>
+				    <option value="блюс">Блюс</option>
+				    <option value="лавринів">Лавринів</option>
+				    <option value="тирській">Тирській</option>
+				    <option value="інші">Інші</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-12">				
+				<textarea name="contentArticle" id="content-article" class="form-control" data-ng-model='article.contentArticle' rows="5" placeholder="Заметки"></textarea>		
+			</div>
+
+			<div class="panel panel-default col-md-12">		  
+			  	<div class="table-responsive">
+				  <table  class="table table-condensed" id="table-art">
+				    <thead>
+						<tr>
+							<th>№</th>
+						    <th>Толщина (мм)</th>
+						    <th>Ширина листа(мм)</th>
+						    <th>Длинна листа(мм)</th>
+						    <th>Форма</th>
+						    <th>Метры порезки(м)</th>
+						    <th>К-во пробоев(шт)</th>
+						    <th>Цена порезки(грн)</th>
+						    <th>Вес металла(кг)</th>
+						    <th>Цена металла приходная (грн/кг)</th>
+						    <th>Цена металла продажная (грн/кг)</th>
+						    <th>Цена проданного металла (грн)</th>
+						    <th>Колличество листов (шт)</th>
+						    <th>№ программы</th>
+						    <th>Вввод цены</th>
+						    <th>Прикрепить листы</th>
+						</tr>
+					</thead>
+					<tbody id="add-article">
+					  	<tr data-ng-repeat="sheet in article.sheet">
+					  		<td><b>{{$index+1}}</b></td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="thickness" type="number" data-ng-model="sheet.thicknessCreate" id="thickness" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="widthList" type="number" data-ng-model="sheet.widthListCreate" id="widthList" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group" ng-class="{ 'has-error': articleForm.lengthList.$dirty && articleForm.lengthList.$invalid}">
+					  				<div class="controls">
+					  					<input name="lengthList" type="number" data-ng-model="sheet.lengthListCreate" id="lengthList" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="form-group checkbox-table"> 				
+									<div class="controls">
+										<label class="checkbox checkbox-table-label">Неправильна форма
+										<input name="formList" type="checkbox" data-ng-model="sheet.formListCreate" id="formList" class="checkbox checkbox-table-midle">
+										</label>												
+									</div>									
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="meterCut" type="number" data-ng-model="sheet.meterCut" id="meterCut" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="pierceAmount" type="number" data-ng-model="sheet.pierceAmount" id="pierceAmount" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="priseCut" type="number" data-ng-model="sheet.priseCut" id="priseCut" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="weighMetal" type="number" data-ng-model="sheet.weighMetal" id="weighMetal" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="priseStoreMetalKg" type="number" data-ng-model="sheet.priseStoreMetalKg" id="priseStoreMetalKg" class="form-control input-sm" disabled>
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="priseSaleMetalKg" type="number" data-ng-model="sheet.priseSaleMetalKg" id="priseSaleMetalKg" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="priseSaleMetal" type="number" data-ng-model="sheet.priseSaleMetal" id="priseSaleMetal" class="form-control input-sm" disabled>
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="amountSheet" type="number" data-ng-model="sheet.amountSheet" id="amountSheet" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">
+					  				<div class="controls">
+					  					<input name="NamePr" type="text" data-ng-model="sheet.NamePr" id="NamePr" class="form-control input-sm">
+					  				</div>
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="form-group checkbox-table"> 				
+									<div class="controls">
+										<label class="checkbox checkbox-table-label">В ручную
+											<input name="sheetCut" type="checkbox" data-ng-model="sheet.sheetCut" id="sheetCut" class="checkbox checkbox-table-midle">
+										</label>	
+									</div>									
+					  			</div>
+					  		</td>
+					  		<td>
+					  			<div class="group-cr form-group">			
+										<a href = "/#!/store/article/{{article._id}}/sheet/{{sheet._id}}/add" class="btn btn-default table-cell input-sm">Склад</a>			
+								</div>
+					  		</td>
+					  	</tr>	  	
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-default col-md-12">	
+			<h3>Листы металла для заказов</h3>	  
+			<div class="table-responsive" data-ng-repeat="sheet in article.sheet">
+				<div class="panel panel-default">
+					<div class="panel-heading">Поле заказа № {{$index+1}}</div>					
+					<table class="table table-hover table-condensed panel-body">
+						<thead>
+							<tr>
+							<th>Владелец листа</th>
+							<th>Толщина (мм)</th>
+							<th>Ширина (мм)</th>
+							<th>Длинна (мм)</th>
+							<th>Форма листа</th>
+							<th>Вес (кг)</th>
+							<th>Цена за кг</th>
+							<th>Цена листа</th>
+							<th>Дата приёмки</th>
+							<th>Имя приёмщика</th>
+							<th>Приметка</th>
+							<th>Удалить</th>					    
+						</tr>
+						</thead>
+						<tbody>
+							<tr data-ng-repeat="store in stores| filter: {articleIdStore:stateParams.articleId,sheetIdStore:sheet._id} " >
+								<td><span class="badge" data-ng-bind="store.NameCustomer | limitTo:12"></span><span ng-show="store.NameCustomer.length > 12">...</span></td>
+								<td><strong data-ng-bind="store.thickness"></strong></td>
+								<td><strong data-ng-bind="store.widthList"></strong></td>
+								<td><strong data-ng-bind="store.lengthList"></strong></td>
+								<td ng-show="{{store.formList}}">Неправильная</td>
+								<td ng-hide="{{store.formList}}">Правильная</td>
+								<td>{{store.weightList}}</td>				  		
+								<td ng-show="{{store.NameCustomer === 'цех'}}"><strong>{{store.priseKg}}</strong></td>
+								<td ng-hide="{{store.NameCustomer === 'цех'}}">-</td>
+								<td>{{store.priseOfList}}</td>
+								<td data-ng-bind="store.created | date:'dd-MM-yy h:mm'"></td>
+								<td data-ng-bind="store.NameAcceptanceInspector"></td>
+								<td><span data-ng-bind ="store.sheetContent | limitTo:6"></span><span ng-show="store.sheetContent.length > 6">...</span></td>
+								<td>
+									<a class="btn btn-primary" data-ng-click="removeStoreFromArticle(store);">
+										<i class="glyphicon glyphicon-trash"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<a href = "/#!/store/article/{{article._id}}/sheet/{{sheet._id}}/add" class="btn btn-default">Прикрепить листы</a>			  			
+				</div>
+			</div>
+		</div>
+		<div class="form-group form-group-sm col-md-2" >
+			<div class="controls">
+				<label>
+				Скидка<input name="discount" type="number"  min="0" max="100" step="1" id="discount" class="form-control" data-ng-model='article.discount' placeholder="Скидка">
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group col-md-10">
+			<a ng-click="calculate()" class="btn btn-default btn-wide">Расчёт цены</a>
+		</div>
+
+		<div class="col-md-12 row">
+			<div class="col-md-3">
+				<dl class="dl-horizontal dl-low">
+				  <dt>Проданый металл :</dt>
+				  <dd><strong>{{totallPriseMetal}} грн</strong></dd>
+				</dl>
+				<dl class="dl-horizontal dl-low">
+				  <dt>Доход от металла :</dt>
+				  <dd><strong>{{totallProfitSaleMetal}} грн</strong></dd>
+				</dl>
+				<dl class="dl-horizontal dl-low">
+				  <dt>Сумма порезки :</dt>
+				  <dd><strong>{{totallPriseCut}} грн</strong></dd>
+				</dl>
+				<dl class="dl-horizontal dl-low">
+				  <dt>Общая сумма :</dt>
+				  <dd><strong>{{totallPrise}} грн</strong></dd>
+				</dl>
+			</div>
+
+			<div class="col-md-9 row">
+				<ul class="list-inline">
+					<li ng-repeat="item in arrResFull" class="col-md-4">	
+					<blockquote>						
+						<p class="dl-low info-price">Толщина : <span>{{item.tricnes}} мм</span></p>
+						<p class="dl-low info-price">Цена порезки : <span>{{item.prCut}} грн</span></p>
+						<p class="dl-low info-price">Цена металла : <span>{{item.prMetall}} грн</span></p>
+						</blockquote>							
+					</li>
+				</ul>
+			</div>								
+		</div>
+
+		<div class="controls">
+			<input type="submit" value="Сохранить изменения" class="btn  btn-primary col-md-12">
+		</div>
+
+		<div data-ng-show="error" class="text-danger col-md-12">
+			<strong data-ng-bind="error"></strong>
+		</div>
+		</fieldset>
+	</form>
+
+		
+	
+</section>

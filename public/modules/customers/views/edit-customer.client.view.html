@@ -1,0 +1,38 @@
+<section data-ng-controller="CustomersController" data-ng-init="findOne()">
+	
+	<h3><span class="label label-default">Редактирование данных о клиенте</span></h3>
+
+
+	<form name="customerForm" class="form-horizontal" data-ng-submit="update(customerForm.$valid)" novalidate>
+		<fieldset class="row">
+			
+			<div class="col-md-9 form-group" ng-class="{ 'has-error' : submitted && customerForm.nameCustomer.$invalid}">
+				<label class="control-label" for="nameCustomer">Имя клиента</label>
+				<div class="controls">
+					<input name="nameCustomer" type="text" data-ng-model="customer.nameCustomer" id="nameCustomer" class="form-control" placeholder="Имя клиента" required>
+			    </div>
+			</div>
+			<div class="col-md-3 form-group" ng-class="{ 'has-error': customerForm.discount.$dirty && customerForm.discount.$invalid }">
+				<label class="control-label" for="discount">Скидка</label>
+				<div class="controls">
+					<input name="discount" type="text" data-ng-model="customer.discount" id="discount" class="form-control" placeholder="Скидка" required>
+				</div>
+			</div>					
+			
+			<div class="col-md-12 form-group" ng-class="{ 'has-error' : submitted && customerForm.content.$invalid}">
+				<label class="control-label" for="content">Контакты и ведомости о клиенте</label>
+				<div class="controls">
+					<textarea name="content" data-ng-model="customer.content" id="content" class="form-control" cols="30" rows="10" placeholder="Заметка" required></textarea>
+				</div>					
+			</div>
+			
+			<div class="col-md-12 form-group">
+				<input type="submit" value="Сохранить изменения" class="btn btn-primary">
+			</div>
+			<div data-ng-show="error" class="text-danger">
+				<strong data-ng-bind="error"></strong>
+			</div>
+		</fieldset>
+	</form>
+	
+</section>

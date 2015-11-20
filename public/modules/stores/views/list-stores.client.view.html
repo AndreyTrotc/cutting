@@ -1,0 +1,165 @@
+<section data-ng-controller="StoresController" data-ng-init="find()">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12">
+				<h3><span class="label label-default">Склад листов</span></h3>			
+			</div>
+
+
+			<div class="col-md-12 panel panel-default container">
+				<div class="panel-body row">
+					<span class="col-md-1 badge">Выборка по:</span>
+
+					<div class="form-group form-group-sm col-md-3">
+						<label for="NameCustomerSelect">Клиенту:</label>
+						<input type="text" id="NameCustomerSelect" name="NameCustomerSelect" value="цех" list="for_NameCustomerSelect" class="form-control input-sm" placeholder="Имя клиента" ng-model="NameCustomerSelect" ng-change="find()">
+						<datalist id="for_NameCustomerSelect">
+						    <option data-ng-repeat="customer in customers | orderBy: 'nameCustomer'" value="{{customer.nameCustomer}}">{{customer.nameCustomer}}</option>
+						</datalist>
+					</div>
+
+			
+					<div class="form-group form-group-sm col-md-1">
+						<label for="thicknesSel">Толщине:</label>
+						<input type="number" id="thicknesSel" name="thicknesSel" min="0" max="200" step="0.1" class="form-control input-sm" placeholder="Толщине"  ng-model="thicknesSel" ng-change="find()">
+					</div>
+					<div class="form-group form-group-sm col-md-1">
+						<label for="widthSel">Ширине:</label>
+						<input type="number" id="widthSel" name="widthSel" min="0" max="3000" step="1" class="form-control input-sm" placeholder="Ширине"  ng-model="widthSel" ng-change="find()">
+					</div>
+					<div class="form-group form-group-sm col-md-1">
+						<label for="lengthSel">Длинне:</label>
+						<input type="number" id="lengthSel" name="lengthSel" min="0" max="10000" step="1" class="form-control input-sm" placeholder="Длинне"  ng-model="lengthSel" ng-change="find()">
+					</div>
+					<div class="form-group form-group-sm col-md-2">
+						<label for="before-date">С какой даты принят:</label>
+						<input type="date" name="before-date" id="before-date" class="form-control input-sm" ng-model="beforeDate" ng-change="find()">
+					</div>
+					<div class="form-group form-group-sm col-md-2">
+						<label for="before-date">До какой даты принят:</label>
+						<input type="date" name="after-date" id="after-date" class="form-control input-sm" ng-model="afterDate" ng-change="find()">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group col-md-1"><span class="text-center badge">Сортировка:</span></div>
+			<div class="form-group col-md-1">
+				<label class="radio-inline">
+					<input type="radio" name="sort" value="name" ng-checked="sortName" id="sort-name" data-ng-model="sortName" ng-change="find()">
+				Имени
+				</label>
+			</div>
+
+			<div class="form-group col-md-1">
+				<label class="radio-inline">
+					<input type="radio" name="sort" value="thickness" ng-checked="thickness" id="sort-thickness" data-ng-model="thickness" ng-change="find()">
+				Толщине
+				</label>
+			</div>
+
+			<div class="form-group col-md-1">
+				<label class="radio-inline">
+					<input type="radio" name="sort" value="widthList" ng-checked="widthList" id="sort-widthList" data-ng-model="widthList" ng-change="find()">
+				Ширине
+				</label>
+			</div>
+
+			<div class="form-group col-md-1">
+				<label class="radio-inline">
+					<input type="radio" name="sort" value="lengthList" ng-checked="lengthList" id="sort-lengthList" data-ng-model="lengthList" ng-change="find()">
+				Длинне
+				</label>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label class="radio-inline">
+					<input type="radio" name="sort" value="sortPriseKg" ng-checked="sortPriseKg" id="sort-sortPriseKg" data-ng-model="sortPriseKg" ng-change="find()">
+				Цене за кг (для цеха)
+				</label>
+			</div>
+
+			<div class="form-group col-md-1">
+				<label class="radio-inline">
+					<input type="radio" name="sort" value="sortCreated" ng-checked="sortCreated" id="sort-created" data-ng-model="sortCreated" ng-change="find()">
+				Дате
+				</label>
+			</div>		
+			
+
+			<div class="panel panel-default col-md-12">		  
+				  <div class="table-responsive">
+					
+
+					<table class="table table-hover table-condensed">
+					    <thead>
+						  <tr>
+						     <th>№</th>
+						     <th>Статус</th>
+						     <th>Владелец листа</th>
+						     <th>Толщина (мм)</th>
+						     <th>Ширина (мм)</th>
+						     <th>Длинна (мм)</th>
+						     <th>Форма листа</th>
+						     <th>Вес (кг)</th>
+						     <th>Цена за кг</th>
+						     <th>Цена листа</th>
+						     <th>Дата приёмки</th>
+						     <th>Имя приёмщика</th>
+						     <th>Приметка</th>
+						     <th>Редактировать</th>
+						     <th>Удалить</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  	<tr data-ng-repeat="store in stores | orderBy: select" ng-class="{success : store.statuss==1}" >
+						  		<td>{{$index+1}}</td>
+						  		<td>{{store.statuss|convertSheetStatus}}</td>
+						  		<td><span class="badge" data-ng-bind="store.NameCustomer | limitTo:12"></span><span ng-show="store.NameCustomer.length > 12">...</span></td>
+						  		<td><strong data-ng-bind="store.thickness"></strong></td>
+						  		<td><strong data-ng-bind="store.widthList"></strong></td>
+						  		<td><strong data-ng-bind="store.lengthList"></strong></td>
+						  		<td ng-show="{{store.formList}}">Неправильная</td>
+						  		<td ng-hide="{{store.formList}}">Правильная</td>
+						  		<td>{{store.weightList}}</td>				  		
+						  		<td ng-show="{{store.NameCustomer === 'цех'}}"><strong>{{store.priseKg}}</strong></td>
+						  		<td ng-hide="{{store.NameCustomer === 'цех'}}">-</td>
+						  		<td>{{store.priseOfList}}</td>
+						  		<td data-ng-bind="store.created | date:'dd-MM-yy h:mm'"></td>
+						  		<td data-ng-bind="store.NameAcceptanceInspector"></td>
+						  		<td><span data-ng-bind ="store.sheetContent | limitTo:6"></span><span ng-show="store.sheetContent.length > 6">...</span></td>
+						  		<td>
+						  			<div class="pull-right" data-ng-show="authentication.user._id == store.user._id" ng-hide = "store.statuss==1">
+							  			<a class="btn btn-primary" href="/#!/stores/{{store._id}}/edit">
+											<i class="glyphicon glyphicon-edit"></i>
+										</a>
+									</div>							
+								</td>								
+								<td>
+									<div class="pull-right"  data-ng-click="find();" data-ng-show="authentication.user._id == store.user._id" ng-hide = "store.statuss==1">
+										<a class="btn btn-primary" data-ng-click="remove(store);">
+											<i class="glyphicon glyphicon-trash"></i>
+										</a>
+									</div>
+								</td>
+						  	</tr>
+						</tbody>
+					</table>
+
+								
+				</div>
+			</div>			
+		</div>
+	</div>
+
+	
+
+	<p class="lead">Общий вес металла по цеху:{{SumOwnMetalWeight}}кг</p>
+	<p class="lead">Общая сумма металла по цеху:{{SumOwnPriceMetal}}грн</p>
+
+	<div class="alert alert-warning text-center" data-ng-if="stores.$resolved && !stores.length">
+		Нет ни одного листа на складе
+	</div>
+</section>
+
+

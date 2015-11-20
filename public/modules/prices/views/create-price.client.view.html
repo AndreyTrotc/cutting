@@ -1,0 +1,41 @@
+<section data-ng-controller="PricesController">
+	<div class="page-header">
+		<h3><span class="label label-default">Создание новой позиции прайса</span></h3>
+	</div>
+	
+		<form name="priceForm" class="row form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="col-md-4 form-group" ng-class="{ 'has-error': priceForm.thickness.$dirty && priceForm.thickness.$invalid }">
+					<label class="control-label" for="thickness">Толщина</label>
+					<div class="controls">
+						<input name="thickness" type="number" step="0.1" data-ng-model="thickness" id="thickness" class="form-control" placeholder="Толщина" required>
+					</div>
+				</div>
+
+				<div class="col-md-4 form-group" ng-class="{ 'has-error': priceForm.thicknessPrice.$dirty && priceForm.thicknessPrice.$invalid }">
+					<label class="control-label" for="thicknessPrice">Цена порезки данной толщины</label>
+					<div class="controls">
+						<input name="thicknessPrice" type="number" step="0.1" data-ng-model="thicknessPrice" id="thicknessPrice" class="form-control" placeholder="Цена порезки" required>
+					</div>
+				</div>
+
+				<div class="col-md-4 form-group" ng-class="{ 'has-error': priceForm.thicknessPiercePrice.$dirty && priceForm.thicknessPiercePrice.$invalid }">
+					<label class="control-label" for="thicknessPiercePrice">Цена пробивки данной толщины</label>
+					<div class="controls">
+						<input name="thicknessPiercePrice" type="number" step="0.1" data-ng-model="thicknessPiercePrice" id="thicknessPiercePrice" class="form-control" placeholder="Цена пробоя" required>
+					</div>
+				</div>
+				
+				
+			</fieldset>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary" value="Сохранить">
+			</div>
+			<div class="alert alert-warning text-center" data-ng-show="error">
+			  	<div class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</div>
+		</form>
+	
+</section>

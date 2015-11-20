@@ -1,0 +1,111 @@
+
+<tr>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				{{store}}
+				<input name="thickness" type="number"  min="0" max="200" step="0.1" id="thickness" class="form-control input-sm" placeholder="S">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr  form-group" >
+			<div class="controls">
+				<input name="widthList" type="number"  min="1" max="3000" step="1" id="widthList" class="form-control input-sm" placeholder="W">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="lengthList" type="number"  min="1" max="10000" step="1" id="lengthList" class="form-control input-sm" placeholder="L">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="form-group  checkbox-table">
+			<div class="controls">
+				<label class="checkbox checkbox-table-label">Непр. форма
+					<input name="formList" type="checkbox" id="formList" class="checkbox checkbox-table-midle">
+				</label>				
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="form-group table-cell" >
+			<div class="controls">
+				<input name="meterCut" type="number"  min="1" step="0.1" id="meterCut" class="form-control input-sm">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="pierceAmount" type="number"  min="1" step="1" id="pierceAmount" class="form-control input-sm">
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="priseCut" type="number"  min="1" step="1" id="priseCut" class="form-control input-sm">
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="weighMetal" type="number"  min="1" step="0.1" id="weighMetal" class="form-control input-sm">
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="priseStoreMetalKg" type="number"  min="1" step="0.1" id="priseStoreMetalKg" class="form-control input-sm" disabled>
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="priseSaleMetalKg" type="number"  min="1" step="0.1" id="priseSaleMetalKg" class="form-control input-sm">
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="priseSaleMetal" type="number"  min="1" step="0.1" id="priseSaleMetal" class="form-control input-sm" disabled>
+			</div>
+		</div>		
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="amount-sheet" type="number"  min="1" value="1" step="1" id="amount-sheet" class="form-control input-sm" placeholder="к-во">
+			</div>
+		</div>					
+	</td>
+	<td>
+		<div class="group-cr form-group" >
+			<div class="controls">
+				<input name="NamePr" type="text" id="NamePr" class="form-control input-sm" placeholder="№ пр">
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="form-group  checkbox-table" >
+			<div class="controls">
+				<label class="checkbox checkbox-table-label">В ручную
+				<input name="sheetCut" type="checkbox" id="sheetCut" class="checkbox  checkbox-table-midle input-sm">
+				</label>				
+			</div>
+		</div>
+	</td>
+	<td>
+		<div class="group-cr form-group">			
+			<a href = "/#!/store/article/{{article._id}}/sheet/{{sheet._id}}/add" class="btn btn-default table-cell input-sm">Склад</a>			
+		</div>
+	</td>		
+</tr>

@@ -1,0 +1,42 @@
+table input{
+	font-size: 10px
+}
+.add-customer{
+	margin-top: 24px;
+}
+.table-cell{
+	width: 108%;
+}
+.list-prices{
+	margin-right: 80px;
+}
+.dl-low{
+	margin-top: -12px;
+}
+.info-price{
+	font-size: 14px!important;
+}
+.btn-wide{
+	width: 100%;
+	margin-left: -40px;
+	margin-top: 16px;
+}
+.article-customer-name{
+	float: none!important;
+	font-size: 18px!important;
+}
+.article-price-info{
+	margin-top: 15px;
+}
+.article-alert{
+	font-size: 14px
+}
+.article-list-radio{
+	margin-top: -15px;
+}
+.btn-edit{
+	width: 90%
+}
+.article-hover:hover{
+	background-color: #DEE2E3;
+}

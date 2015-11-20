@@ -1,0 +1,28 @@
+<section data-ng-controller="CustomersController" data-ng-init="findOne()">
+	<div class="row page-header">
+		<h2 class="col-md-9">Имя клиента: <span class="label label-default" data-ng-bind="customer.nameCustomer"></span></h2>
+		<div class="col-md-3">
+			<h4 class="lead">Скидка: <strong  data-ng-bind="customer.discount"></strong>%</h4>
+		</div>
+		<h4 class="col-md-12 text-muted">Контакты и ведомости о клиенте:</h4>
+		<p class="col-md-12" data-ng-bind="customer.content"></p>
+	</div>
+
+	<div class="pull-right" data-ng-show="authentication.user._id == customer.user._id">
+		<a class="btn btn-primary" href="/#!/customers/{{customer._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Внесён
+			<span data-ng-bind="customer.created | date:'mediumDate'"></span>
+			пользователем
+			<span data-ng-bind="customer.user.displayName"></span>
+		</em>
+	</small>
+	
+</section>

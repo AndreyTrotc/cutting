@@ -1,0 +1,37 @@
+<section data-ng-controller="PricesController" data-ng-init="findOne()">
+	<div class="row page-header">
+		<div class="col-md-4">
+			<h3>Толщина: <strong data-ng-bind="price.thickness"></strong><strong>мм</strong></h3>
+		</div>
+		<div class="col-md-4">
+			<h3>Цена: <strong data-ng-bind="price.thicknessPrice"></strong><strong>грн</strong></h3>
+		</div>
+		<div class="col-md-4">
+			<h3>Цена пробивки: <strong data-ng-bind="price.thicknessPiercePrice"></strong><strong>грн</strong></h3>
+		</div>    
+	</div>
+
+		<div class="col-md-6">
+			<div class="pull-left" data-ng-show="authentication.user._id == price.user._id">
+				<a class="btn btn-primary" href="/#!/prices/{{price._id}}/edit">
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>
+				<a class="btn btn-primary" data-ng-click="remove();">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</div>			
+		</div>
+
+		<div class="col-md-6">
+			<small class="pull-right">
+				<em class="text-muted">
+					Создана
+					<span data-ng-bind="price.created | date:'mediumDate'"></span>
+					пользователем
+					<span data-ng-bind="price.user.displayName"></span>
+				</em>
+			</small>
+		</div>	
+
+	
+</section>

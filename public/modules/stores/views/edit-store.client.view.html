@@ -1,0 +1,92 @@
+<section data-ng-controller="StoresController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h3><span class="label label-default">Редактировать параметры листа<span/></h3>
+	</div>
+	
+	<form name="storeForm" class="form-horizontal row" data-ng-submit="update()" novalidate>
+			
+		
+		<div class="form-group form-group-sm col-md-12">
+			<label class="control-label" for="NameCustomer">Имя клиента</label>
+			<input name="NameCustomer" type="text" data-ng-model="store.NameCustomer" list="for_NameCustomer" id="NameCustomer" class="form-control">
+			<datalist id="for_NameCustomer">
+			    <option data-ng-repeat="customer in customers | orderBy: 'nameCustomer'" value="{{customer.nameCustomer}}">{{customer.nameCustomer}}</option>
+			</datalist>
+		</div>
+
+		<div class="form-group form-group-sm col-md-2">
+			<label class="control-label" for="thickness">Толщина</label>
+			<div class="controls">
+				<input name="thickness" type="number" min="0" max="200" step="0.1" data-ng-model="store.thickness" id="thickness" class="form-control">
+			</div>
+		</div>
+
+		<div class="form-group form-group-sm col-md-2">
+			<label class="control-label" for="widthList">Ширина</label>
+			<div class="controls">
+				<input name="widthList" type="number"  min="1" max="3000" step="1" data-ng-model="store.widthList" id="widthList" class="form-control">
+			</div>
+		</div>
+
+		<div class="form-group form-group-sm col-md-2">
+			<label class="control-label" for="lengthList">Длинна</label>
+			<div class="controls">
+				<input name="lengthList" type="number" min="1" max="10000" step="1" data-ng-model="store.lengthList" id="lengthList" class="form-control">
+			</div>
+		</div>
+
+		
+		<div class="form-group checkbox-edit-midle col-md-1">				
+			<div class="controls">
+				<label class="checkbox checkbox-edit-label" for="form-list">Форма листа</label>
+				<input name="formList" type="checkbox" class="checkbox checkbox-edit-input" data-ng-model="store.formList" id="form-list">
+			</div>
+		</div>
+		
+
+		<div class="form-group form-group-sm col-md-2">
+			<label class="control-label" for="weightList">Вес листа</label>
+			<div class="controls">
+				<input name="weightList" type="number" data-ng-model="store.weightList" id="weightList" class="form-control">
+			</div>
+		</div>				
+
+		<div class="form-group form-group-sm col-md-4">
+			<label for="NameAcceptanceInspector">Имя приёмщика</label>
+			<select data-ng-model="store.NameAcceptanceInspector" name="NameAcceptanceInspector" class="form-control name-aceptance" id="NameAcceptanceInspector">		
+			    <option disabled>Выберите имя резчика</option>
+			    <option value="Дияк">Дияк</option>
+			    <option value="Теодор">Теодор</option>
+			    <option value="Гараздовский">Гараздовский</option>
+			    <option value="Паша">Паша</option>
+			    <option value="Игорь">Игорь</option>
+			</select>
+		</div>
+
+		
+		<div ng-show="store.NameCustomer === 'цех'" class="form-group form-group-sm col-md-12">
+			<label class="control-label" for="priseKg">Цена за кг</label>
+			<div class="controls">
+				<input name="priseKg" type="number" data-ng-model="store.priseKg" id="priseKg" class="form-control">
+			</div>
+		</div>
+
+		
+		
+		<div class="form-group form-group-sm col-md-12">
+			<label class="control-label" for="sheetContent">Приметка</label>
+			<div class="controls">
+				<input name="sheetContent" type="text" data-ng-model="store.sheetContent" id="sheetContent" class="form-control">
+			</div>
+		</div>
+		<div class="form-group col-md-12">
+			<input type="submit" value="Сохранить изменения" class="btn btn-primary">
+		</div>
+		<div data-ng-show="error" class="text-danger col-md-12">
+			<strong data-ng-bind="error"></strong>
+		</div>
+
+			
+	</form>
+	
+</section>

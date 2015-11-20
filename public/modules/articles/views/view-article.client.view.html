@@ -1,0 +1,49 @@
+<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
+
+	<div class="page-header col-md-12">
+		<h3><span class="label label-default" data-ng-bind="article.NameCustomerCreate"></span></h3>		
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">				
+			<dl class="dl-horizontal dl-low">
+			  <dt>Сумма порезки :</dt>
+			  <dd><strong>{{article.arrResFullPrice[1].totallPriseCut}} грн</strong></dd>
+			</dl>
+			<dl class="dl-horizontal dl-low">
+			  <dt>Доход от металла :</dt>
+			  <dd><strong>{{article.arrResFullPrice[1].totallProfitSaleMetal}} грн</strong></dd>
+			</dl>
+			<dl class="dl-horizontal dl-low">
+			  <dt>Сумма металла :</dt>
+			  <dd><strong>{{article.arrResFullPrice[1].totallPriseMetal}} грн</strong></dd>
+			</dl>
+			<dl class="dl-horizontal dl-low">
+			  <dt>Общая сумма :</dt>
+			  <dd><strong>{{article.arrResFullPrice[1].totallPrise}} грн</strong></dd>
+			</dl>
+		</div>
+
+		<ul class="list-inline col-md-8">
+			<li ng-repeat="price in article.arrResFullPrice[0]">	
+			<blockquote>						
+				<p class="dl-low info-price">Толщина : <span>{{price.tricnes}} мм</span></p>
+				<p class="dl-low info-price">Цена порезки : <span>{{price.prCut}} грн</span></p>
+				<p class="dl-low info-price">Цена металла : <span>{{price.prMetall}} грн</span></p>
+				</blockquote>							
+			</li>
+		</ul>								
+	</div>
+	<div class="form-group">
+			<a class="btn btn-default col-md-12 add-customer" ng-href="/#!/articles">Вернуться к списку</a>
+		</div>
+	<small>
+		<em class="text-muted">
+			Создан
+			<span data-ng-bind="article.created | date:'dd-MM-yy h:mm'"></span>
+			пользователем
+			<span data-ng-bind="article.user.displayName"></span>
+		</em>
+	</small>
+	<p class="lead" data-ng-bind="article.content"></p>
+</section>

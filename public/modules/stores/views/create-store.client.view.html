@@ -1,0 +1,65 @@
+<section data-ng-controller="StoresController" data-ng-init="findCustomer()" class="row">
+	
+	<h3 class="col-md-12 down-h"><span class="label label-default">Добавить на склад листы</span></h3>
+
+	<form name="storeForm" class="form-horizontal row" data-ng-submit="create()" novalidate>
+
+
+		<div class="form-group  down  col-md-10">
+			<label for="NameCustomerCreate">Выберите имя клиента:</label>
+			<input type="text"  name="NameCustomer" class="form-control" id="NameCustomer" list="for_NameCustomer" ng-model="NameCustomer" required>
+			
+			<datalist id="for_NameCustomer">		
+				 <option data-ng-repeat="customer in customers | orderBy: 'nameCustomer'" value="{{customer.nameCustomer}}">{{customer.nameCustomer}}</option>			
+			</datalist>			
+		</div>
+
+		<div class="col-md-2">
+			<a ng-href="/#!/customers/create" class="btn btn-default">Добавить клиента</a>
+		</div>
+
+		<div class="alert alert-warning text-center col-md-12" data-ng-show="error">
+			<div class="text-danger">
+				<strong data-ng-bind="error"></strong>
+			</div>
+		</div>
+
+		<div class="panel panel-default col-md-12">		  
+		  <div class="table-responsive">
+			  <table class="table table-condensed" id="table">				  	
+			    <thead>
+				  <tr>
+				     <th>Толщина (мм)</th>
+				     <th>Ширина (мм)</th>
+				     <th>Длинна (мм)</th>
+				     <th>Колличество (шт)</th>
+				     <th>Цена листов (грн)</th>
+				     <th>Вес листов (кг)</th>
+				     <th>Форма листа</th>
+				     <th>Приёмщик</th>
+				     <th>Заметка</th>
+				  </tr>
+				  </thead>
+				  <!--Загрузка шаблона-->
+				  <tbody id="add-list">
+				  		  	
+				  </tbody>
+			  </table>
+		  </div>			  
+		</div>
+		<div class="form-group">
+			<a addlist class="btn btn-default col-md-12">Добавить новый лист</a>
+		</div>
+		
+
+		<div class="col-md-12 form-group">
+			<input type="submit" value="Добавить на склад" class="btn btn-primary"></input>
+		</div>
+
+
+		
+
+	</form>
+	
+	
+<section/>

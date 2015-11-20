@@ -1,0 +1,156 @@
+<section data-ng-controller="ArticlesController" data-ng-init="find()" class="row">
+
+	<h3 class="col-md-2"><span class="label label-default">Список заказов</span></h3>	
+
+	<div class="form-group form-group-sm col-md-2">
+		<label for="name-customer-create">Выберите имя клиента:</label>
+		<input type="text"  name="NameCustomerCreate" data-ng-model='NameCustomerSelect' ng-change="find()" class="form-control" id="name-customer-create" list="for_NameCustomerCreate">
+		<datalist id="for_NameCustomerCreate">		
+			 <option data-ng-repeat="customer in customers | orderBy: 'nameCustomer'" value="{{customer.nameCustomer}}">{{customer.nameCustomer}}</option>			
+		</datalist>			
+	</div>
+	
+	<div class="form-group form-group-sm col-md-2">	 
+		<label for="before-date">С какой даты:</label>
+		<input type="date" name="before-date" id="before-date" class="form-control" ng-model="beforeDate" ng-change="find()">
+	</div>
+	<div class="form-group form-group-sm col-md-2">
+		<label for="before-date">До какой даты:</label>
+		<input type="date" name="after-date" id="after-date" class="form-control" ng-model="afterDate" ng-change="find()">
+	</div>
+	
+	<div class="checkbox col-md-2">
+		<label>
+			<input name="storeArticles" type="checkbox" id="arhive-articles" data-ng-model="storeArticles" ng-change="find()">Архив заказов
+		</label>
+	</div>
+	<div class="col-md-2">
+	<div class="form-group">
+		<label class="radio-inline">
+			<input type="radio" name="sort" value="sortPriceCut" ng-checked="sortPriceCut" id="sort-cut" data-ng-model="sortPriceCut" ng-change="find()">
+		По цене порезки
+		</label>
+	</div>
+
+	<div class="form-group article-list-radio">
+		<label class="radio-inline">
+			<input type="radio" name="sort" value="sortPriceMettal" ng-checked="sortPriceMettal" id="sort-metal" data-ng-model="sortPriceMettal" ng-change="find()">
+		По цене металла
+		</label>
+	</div>
+
+	<div class="form-group article-list-radio">
+		<label class="radio-inline">
+			<input type="radio" name="sort" value="sortCreated" ng-checked="sortCreated" id="sort-created" data-ng-model="sortCreated" ng-change="find()">
+		По времени создания
+		</label>
+	</div>
+	</div>
+
+	<ul class="list-group col-md-12">
+		<li data-ng-repeat="article in articles | orderBy: select" class="list-group-item article-list article-hover row">				
+				<small class="col-md-2">Добавлен
+					<span data-ng-bind="article.created | date:'dd-MM-yy h:mm'"></span>
+					пользователем
+					<span data-ng-bind="article.user.displayName"></span>
+					<small>Скидка:{{article.discount}}%</small>
+				</small>
+				
+				<p class="col-md-2"><kbd class="article-customer-name">{{article.NameCustomerCreate | limitTo: 12}}<span ng-show="article.NameCustomerCreate.length > 12">...</span></kbd></p>
+			
+
+				<div class="col-md-2">
+					<label>
+					<input name="formSale" type="checkbox" id="formSale" class="float" data-ng-model="article.formSale" ng-change="updateList(article)">Форма продажи безнал
+					</label>
+
+					<label>
+					<input name="invoiseCompl" type="checkbox" id="invoiseCompl" class="float" data-ng-model='article.invoiseCompl' ng-change="updateList(article)">Счёт выставлен
+					</label>
+				</div>
+				<div class="col-md-2">
+					<label>
+					<input name="sheetCut" type="checkbox" id="sheet-сut" class="float" data-ng-model='article.sheetCut' ng-change="updateList(article)">Порезано
+					</label>
+
+					<label>
+					<input name="invoisePaid" type="checkbox" id="invoisePaid" class="float" data-ng-model='article.invoisePaid' ng-change="updateList(article)">Оплата полная
+					</label>					
+				</div>
+				<div class="col-md-2">
+					<label>
+					<input name="restSheepment" type="checkbox" id="restSheepment" class="float" ng-disabled="!article.sheetCut" data-ng-model='article.restSheepment' ng-change="updateList(article)">Отходы отгрузили
+					</label>
+
+					<label>
+					<input name="prodSheepment" type="checkbox" id="prodSheepment" class="float" ng-disabled="!article.sheetCut" data-ng-model='article.prodSheepment' ng-change="updateList(article)">Детали отгрузили
+					</label>				
+				</div>
+					
+				<div class="col-md-2">
+					<div class="pull-right">					
+						<a class="btn btn-primary" data-ng-click="remove(article);">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</div>				
+					<div class="pull-left">
+			  			<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
+							<i class="glyphicon glyphicon-edit"></i>
+						</a>
+					</div>										
+				</div>				
+
+				<div class="clearfix"></div>
+
+				<div class="form-group col-md-2">
+					<a class="btn btn-default" data-ng-href="#!/articles/{{article._id}}">Просмотр деталей счёта</a>
+				</div>
+
+				
+				<p class="col-md-1 text-center"><strong>Порезка <br>{{article.arrResFullPrice[1].totallPriseCut}}грн</strong></p>
+				<p class="col-md-1 text-center"><strong>Металл <br>{{article.arrResFullPrice[1].totallPriseMetal}}грн</strong></p>
+				<p class="col-md-2 text-center">
+					<strong>Толщины: <br>
+						<span ng-repeat="price in article.arrResFullPrice[0]">{{price.tricnes}}мм </span>
+					</strong>
+				</p>
+						
+													
+					
+				
+
+				<div class="col-md-6">
+					<p ng-repeat="price in article.arrResFullPrice[0]" ng-show="!price.prCut"  class="label label-warning col-md-3 text-center">Раскрой <span>{{price.tricnes}} мм</span>!</p>
+					<p ng-show="article.sheetCut && (!article.prodSheepment || !article.restSheepment)" class="label label-success col-md-3 text-center" >Отгрузить!</p>
+					<p ng-show="article.sheetCut && !article.invoisePaid" class="label label-danger col-md-3 text-center" >Нет оплаты!</p>
+					<p ng-show="article.formSale && !article.invoiseCompl"  class="label label-danger col-md-3 text-center">Выставить счёт!</p>
+					<p ng-show="article.invoisePaid && article.invoiseCompl && !article.sheetCut"  class="label label-success col-md-3 text-center">В порезку!</p>			
+				</div>
+				
+
+				<div ng-show="article.contentArticle.length"  class="col-md-12 label label-default article-alert">
+					<em ng-show="article.contentArticle"><strong>{{article.contentArticle | limitTo: 140}}</strong><strong ng-show="article.contentArticle.length > 140">...</strong></em>
+				</div>						
+					
+		</li>
+	</ul>
+
+	<pagination ng-model="currentPage" total-items="page.length/3" max-size="maxSize" boundary-links="true"></pagination>
+
+	<div class="col-md-12">
+		<p>Сумма:{{Sum}}грн</p>
+		<p>Сумма порезки за указаный период:{{SumCut}}грн</p>
+		<p>Сумма проданного металла за указаный период:{{SumMetal}}грн</p>
+		<p>Сумма зазаботка на продаже металла:{{SumProfitMetal}}грн</p>
+	</div>
+
+
+
+
+	<div class="alert alert-warning text-center col-md-12" data-ng-if="articles.$resolved && !articles.length">
+		Нет заказов с такими параметрами
+	</div>
+</section>
+
+
+

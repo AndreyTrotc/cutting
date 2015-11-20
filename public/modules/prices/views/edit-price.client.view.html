@@ -1,0 +1,39 @@
+<section data-ng-controller="PricesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h3><span class="label label-default">Редактировать позицию</span></h3>
+	</div>
+	
+		<form name="priceForm" class="row form-horizontal" data-ng-submit="update(priceForm.$valid)" novalidate>
+			
+				<div class="col-md-4 form-group" ng-class="{ 'has-error' : submitted && priceForm.thickness.$invalid}">
+					<label class="control-label" for="thickness">Толщина</label>
+					<div class="controls">
+						<input name="thickness" type="number" data-ng-model="price.thickness" id="thickness" class="form-control" placeholder="Толщина" disabled required>
+					</div>					
+				</div>
+
+				<div class="col-md-4 form-group" ng-class="{ 'has-error' : submitted && priceForm.thicknessPrice.$invalid}">
+					<label class="control-label" for="thicknessPrice">Цена порезки</label>
+					<div class="controls">
+						<input name="thicknessPrice" type="number" data-ng-model="price.thicknessPrice" id="thicknessPrice" class="form-control" placeholder="Цена порезки" required>
+					</div>					
+				</div>
+
+				<div class="col-md-4 form-group" ng-class="{ 'has-error' : submitted && priceForm.thicknessPiercePrice.$invalid}">
+					<label class="control-label" for="thicknessPiercePrice">Цена пробивки</label>
+					<div class="controls">
+						<input name="thicknessPiercePrice" type="number" data-ng-model="price.thicknessPiercePrice" id="thicknessPiercePrice" class="form-control" placeholder="Цена пробивки" required>
+					</div>					
+				</div>			
+
+				<div class="col-md-12 form-group">
+					<input type="submit" value="Сохранить изменения" class="btn btn-primary">
+				</div>
+
+				<div data-ng-show="error" class="col-md-12 text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			
+		</form>
+	
+</section>
